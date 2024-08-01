@@ -533,8 +533,10 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                                             bookingId: bookingId == 'null'
                                                 ? null
                                                 : int.parse(bookingId!),
-                                            discount:
-                                                int.parse(discount.text.trim()),
+                                            discount: discount.text.isEmpty
+                                                ? 0
+                                                : int.parse(
+                                                    discount.text.trim()),
                                           ));
                                     }
                                   }),
