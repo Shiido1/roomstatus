@@ -6,15 +6,15 @@ part 'login_response_model.g.dart';
 
 @JsonSerializable()
 class LoginResponseModel {
-  bool? success;
-  String? message;
-  Data? data;
+	bool? success;
+	String? message;
+	Data? data;
 
-  LoginResponseModel({this.success, this.message, this.data});
+	LoginResponseModel({this.success, this.message, this.data});
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    return _$LoginResponseModelFromJson(json);
-  }
+	factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
+		return _$LoginResponseModelFromJson(json);
+	}
 
-  Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
+	Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
 }

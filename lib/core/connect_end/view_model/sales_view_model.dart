@@ -53,13 +53,13 @@ class SalesViewModel extends BaseViewModel {
 
   bool isItemTapped = false;
 
-  List<Datum>? _getAllItemsResponseModelList;
+  List<Datum>? _getAllItemsResponseModelList = [];
   List<Datum>? get getAllItemsResponseModelList =>
       _getAllItemsResponseModelList;
   // ignore: prefer_final_fields
   List<Datum> _getAllItemsList = [];
   List<Datum> get getAllItemsList => _getAllItemsList;
-  List<Datum>? _getAllItemsResponseModelListCopy;
+  List<Datum>? _getAllItemsResponseModelListCopy = [];
   GetAllItemsResponseModel? _getAllItemsResponseModel;
   GetAllItemsResponseModel? get getAllItemsResponseModel =>
       _getAllItemsResponseModel;
@@ -173,14 +173,14 @@ class SalesViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  groupItems(item) {
+  groupItems(context, item) {
     Map<String?, List<Datum>> groupedValue;
     groupedValue =
-        groupBy(getAllItemsResponseModel!.data!, (obj) => obj.category);
+        groupBy(getAllItemsResponseModelList!, (obj) => obj.category);
     _getAllItemsList.clear();
     _itemList.clear();
     if (item == 'all') {
-      _getAllItemsList.addAll(getAllItemsResponseModel!.data!);
+      _getAllItemsList.addAll(getAllItemsResponseModelList!);
       _itemList.add(item);
     } else {
       _getAllItemsList.addAll(groupedValue[item]!);

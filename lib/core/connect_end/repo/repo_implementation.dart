@@ -53,6 +53,8 @@ class AuthRepoImpl {
 
   Future<LoginResponseModel> login(LoginEntityModel loginEntityModel) async {
     final response = await _contract.login(loginEntityModel);
+    _session.isLoggedIn = true;
+    _chache(response.data);
     return response;
   }
 

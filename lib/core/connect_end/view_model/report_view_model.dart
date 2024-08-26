@@ -62,8 +62,8 @@ class ReportViewModel extends BaseViewModel {
   GetAllItemsResponseModel? get getAllItemsResponseModel =>
       _getAllItemsResponseModel;
 
-  List<Datum>? _getAllItemsResponseModelListCopy;
-  List<Datum>? _getAllItemsResponseModelList;
+  List<Datum>? _getAllItemsResponseModelListCopy=[];
+  List<Datum>? _getAllItemsResponseModelList =[];
   List<Datum>? get getAllItemsResponseModelList =>
       _getAllItemsResponseModelList;
 

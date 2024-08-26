@@ -369,38 +369,44 @@ class _ReportRevenueState extends State<ReportRevenue> {
                                                         ),
                                                       ),
                                                     ),
-                                                    ...model
+                                                    if (model
                                                         .getAllItemsResponseModelList!
-                                                        .map((o) => Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      bottom:
-                                                                          10.w),
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  widget.roomController
-                                                                          .text =
-                                                                      o.name!;
-                                                                  id = o.id
-                                                                      .toString();
-                                                                  onTapSales =
-                                                                      false;
-                                                                  setState(
-                                                                      () {});
-                                                                },
-                                                                child: TextView(
-                                                                  text:
-                                                                      o.name ??
-                                                                          '',
-                                                                  fontSize:
-                                                                      18.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
+                                                        .isEmpty)
+                                                      const SizedBox.shrink()
+                                                    else
+                                                      ...model
+                                                          .getAllItemsResponseModelList!
+                                                          .map((o) => Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        bottom:
+                                                                            10.w),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    widget.roomController
+                                                                            .text =
+                                                                        o.name!;
+                                                                    id = o.id
+                                                                        .toString();
+                                                                    onTapSales =
+                                                                        false;
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  child:
+                                                                      TextView(
+                                                                    text:
+                                                                        o.name ??
+                                                                            '',
+                                                                    fontSize:
+                                                                        18.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ))
+                                                              ))
                                                   ],
                                                 ),
                                               ),

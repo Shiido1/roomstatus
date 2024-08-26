@@ -9,7 +9,7 @@ part of 'data.dart';
 Data _$DataFromJson(Map<String, dynamic> json) => Data(
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
-      total: json['total'] as dynamic,
+      total: json['total'],
       booking: json['booking'] as String?,
       customer: json['customer'] as String?,
       customerType: json['customer_type'] as String?,

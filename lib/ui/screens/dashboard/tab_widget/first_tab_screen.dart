@@ -30,17 +30,17 @@ class FirstTabScreen extends ViewModelWidget<AuthViewModel> {
             Row(
               children: [
                 viewModel.searchFormField(),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 12.w),
-                  padding: EdgeInsets.all(11.4.w),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColor.deepprimary),
-                  child: SvgPicture.asset(AppImage.dash),
-                ),
+                // SizedBox(
+                //   width: 20.w,
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(top: 12.w),
+                //   padding: EdgeInsets.all(11.4.w),
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10),
+                //       color: AppColor.deepprimary),
+                //   child: SvgPicture.asset(AppImage.dash),
+                // ),
               ],
             ),
             SizedBox(

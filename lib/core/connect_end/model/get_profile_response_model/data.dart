@@ -11,6 +11,7 @@ class Data {
   @JsonKey(name: 'current_role')
   String? currentRole;
   String? username;
+  String? image;
   dynamic department;
   String? hotel;
   @JsonKey(name: 'hotel_code')
@@ -27,6 +28,7 @@ class Data {
     this.phone,
     this.currentRole,
     this.username,
+    this.image,
     this.department,
     this.hotel,
     this.hotelCode,

@@ -185,7 +185,7 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                   height: 32.h,
                                 ),
                                 PrintButtonWidget(
-                                    buttonText: 'Print Receipt',
+                                    buttonText: 'Make Payment',
                                     color: AppColor.white,
                                     border: 24,
                                     widget: SvgPicture.asset(

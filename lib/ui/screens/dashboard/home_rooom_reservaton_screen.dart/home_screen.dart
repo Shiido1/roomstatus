@@ -80,81 +80,75 @@ class _HomeRoomReservationScreenState extends State<HomeRoomReservationScreen>
                             fontSize: 22.sp,
                           ),
                         ),
+                        Spacer(),
                         SizedBox(
-                          width: 100,
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                AppImage.notification,
-                                color: AppColor.white,
-                              ),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              model.getProfileResponseModel?.data?.hotel == null
-                                  ? GestureDetector(
+                          // width: 100,
+                          child: model.getProfileResponseModel?.data?.hotel ==
+                                  null
+                              ? GestureDetector(
+                                  onTap: () => model
+                                      .displaylogoutModalBottomSheet(context),
+                                  child: Container(
+                                    padding: EdgeInsets.all(12.w),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: AppColor.white),
+                                      shape: BoxShape.circle,
+                                      color: AppColor.fadeddeepprimary,
+                                    ),
+                                    child: SvgPicture.asset(AppImage.profile),
+                                  ),
+                                )
+                              : !model.getProfileResponseModel!.data!.hotelLogo!
+                                          .contains('http') ||
+                                      model.getProfileResponseModel!.data!
+                                              .image ==
+                                          null
+                                  ? Container(
+                                      padding: EdgeInsets.all(6.4.w),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 3.w,
+                                              color: AppColor.white),
+                                          shape: BoxShape.circle),
+                                      child: TextView(
+                                        text: getInitials(
+                                            string: model
+                                                    .getProfileResponseModel
+                                                    ?.data
+                                                    ?.hotel
+                                                    ?.toUpperCase() ??
+                                                '',
+                                            limitTo: 1),
+                                        fontWeight: FontWeight.w700,
+                                        maxLines: 1,
+                                        color: AppColor.white,
+                                        textOverflow: TextOverflow.fade,
+                                        fontSize: 24.sp,
+                                      ),
+                                    )
+                                  : GestureDetector(
                                       onTap: () =>
                                           model.displaylogoutModalBottomSheet(
                                               context),
                                       child: Container(
-                                        padding: EdgeInsets.all(12.w),
+                                        width: 44,
+                                        height: 44,
                                         decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: AppColor.white),
+                                          color: AppColor.white.withOpacity(.7),
                                           shape: BoxShape.circle,
-                                          color: AppColor.fadeddeepprimary,
+                                          image: DecorationImage(
+                                              image: NetworkImage(model
+                                                      .getProfileResponseModel
+                                                      ?.data
+                                                      ?.hotelLogo ??
+                                                  ''),
+                                              fit: BoxFit.cover),
                                         ),
-                                        child:
-                                            SvgPicture.asset(AppImage.profile),
                                       ),
-                                    )
-                                  : !model.getProfileResponseModel!.data!
-                                          .hotelLogo!
-                                          .contains('http')
-                                      ? Container(
-                                          padding: EdgeInsets.all(6.4.w),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 3.w,
-                                                  color: AppColor.white),
-                                              shape: BoxShape.circle),
-                                          child: TextView(
-                                            text: getInitials(
-                                                string: model
-                                                        .getProfileResponseModel
-                                                        ?.data
-                                                        ?.hotel
-                                                        ?.toUpperCase() ??
-                                                    '',
-                                                limitTo: 1),
-                                            fontWeight: FontWeight.w700,
-                                            maxLines: 1,
-                                            color: AppColor.white,
-                                            textOverflow: TextOverflow.fade,
-                                            fontSize: 24.sp,
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          onTap: () => model
-                                              .displaylogoutModalBottomSheet(
-                                                  context),
-                                          child: Container(
-                                            width: 44,
-                                            height: 44,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: NetworkImage(model
-                                                          .getProfileResponseModel
-                                                          ?.data
-                                                          ?.hotelLogo ??
-                                                      ''),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                          ),
-                                        ),
-                            ],
-                          ),
+                                    ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
                         )
                       ],
                     ),

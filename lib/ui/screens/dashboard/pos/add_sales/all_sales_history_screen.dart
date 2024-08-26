@@ -160,6 +160,7 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                           ? Column(
                               children: [
                                 ...model.getAllSalesResponseModel!.data!.sales!
+                                    .reversed
                                     .where((element) => element.customer!
                                         .toLowerCase()
                                         .contains(query.toLowerCase()))
@@ -171,6 +172,7 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                           : Column(
                               children: [
                                 ...model.getAllSalesResponseModel!.data!.sales!
+                                    .reversed
                                     .map((e) => reversedContent(
                                           e,
                                         ))

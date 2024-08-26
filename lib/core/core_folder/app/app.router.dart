@@ -5,6 +5,9 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/cupertino.dart' as _i16;
+import 'package:flutter/material.dart' as _i15;
+import 'package:flutter/material.dart';
 import 'package:roomstatus/ui/screens/authentication/create_account/create_account_screen.dart'
     as _i5;
 import 'package:roomstatus/ui/screens/authentication/create_account/create_account_second_screen.dart'
@@ -29,9 +32,6 @@ import 'package:roomstatus/ui/screens/dashboard/report/report_room_screen.dart'
 import 'package:roomstatus/ui/screens/dashboard/report/report_sales_screen.dart'
     as _i11;
 import 'package:roomstatus/ui/screens/onbarding1_screen.dart' as _i3;
-import 'package:flutter/cupertino.dart' as _i16;
-import 'package:flutter/material.dart' as _i15;
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i17;
 

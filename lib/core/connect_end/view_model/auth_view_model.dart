@@ -19,7 +19,6 @@ import 'package:roomstatus/core/connect_end/model/otp_entity_model.dart';
 import 'package:roomstatus/core/connect_end/model/otp_response_model/otp_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/recent_otp_response_model/recent_otp_response_model.dart';
 import 'package:roomstatus/ui/app_assets/image_picker.dart';
-import 'package:roomstatus/ui/screens/authentication/otp/otp_screen.dart';
 import 'package:roomstatus/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -295,11 +294,8 @@ class AuthViewModel extends BaseViewModel {
         _isLoading = false;
         await AppUtils.snackbar(contxt,
             message: _loginResponse?.message!.toString());
-        Get.to(
-            () => OTPScreen(
-                  email: _loginResponse!.data!.email,
-                ),
-            transition: Transition.cupertino,
+        Get.to(() => const Dashboard(),
+            transition: Transition.fadeIn,
             duration: const Duration(seconds: 2));
       }
     } catch (e) {
@@ -365,6 +361,7 @@ class AuthViewModel extends BaseViewModel {
       _isLoading = true;
       _getProfileResponseModel =
           await runBusyFuture(repositoryImply.profile(), throwException: true);
+      logger.d(_getProfileResponseModel!.data);
     } catch (e) {
       _isLoading = false;
       logger.d(e);

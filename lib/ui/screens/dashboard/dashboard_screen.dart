@@ -23,7 +23,7 @@ class _DashboardState extends State<Dashboard> {
 
   final List<Widget> _body = [
     const HomeRoomReservationScreen(),
-    const RoomReservationScreen(),
+    RoomReservationScreen(),
     const ReportScreen(),
     const POSScreen(),
   ];

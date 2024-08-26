@@ -29,7 +29,7 @@ class POSScreen extends StatefulWidget {
 }
 
 class _POSScreenState extends State<POSScreen> {
-  RefreshController? refreshControllerState = RefreshController();
+  RefreshController? refreshController = RefreshController();
   String query = '';
 
   @override
@@ -141,7 +141,7 @@ class _POSScreenState extends State<POSScreen> {
                                   text: 'All',
                                   callback: () {
                                     model.isItemTapped = false;
-                                    model.groupItems('all');
+                                    model.groupItems(context, 'all');
                                     model.notifyListeners();
                                   },
                                   color: model.isItemTapped == false
@@ -154,7 +154,7 @@ class _POSScreenState extends State<POSScreen> {
                                         text: e.source ?? '',
                                         callback: () {
                                           model.isItemTapped = true;
-                                          model.groupItems(e.source);
+                                          model.groupItems(context, e.source);
                                           model.notifyListeners();
                                         },
                                         color:
@@ -218,16 +218,18 @@ class _POSScreenState extends State<POSScreen> {
                               await model.onRefresh();
                               // ignore: use_build_context_synchronously
                               model.getItems(context);
-                              refreshControllerState?.refreshCompleted();
+                              refreshController?.refreshCompleted();
                             },
                             onLoading: () async {
                               await model.onLoading();
-                              refreshControllerState?.loadComplete();
+                              refreshController?.loadComplete();
                             },
-                            controller: refreshControllerState!,
+                            controller: refreshController!,
                             footer: CustomFooter(builder: ((context, mode) {
                               Widget body;
                               if (model.getAllItemsResponseModel != null &&
+                                      model.getAllItemsResponseModelList!
+                                          .isEmpty ||
                                   model.getAllItemsResponseModel!.data!
                                       .isEmpty) {
                                 body = TextView(
@@ -280,9 +282,9 @@ class _POSScreenState extends State<POSScreen> {
                                                 .contains(query.toLowerCase()))
                                             .map((e) => salesContWidget(d: e))
                                       else if (model.getAllItemsResponseModel != null &&
-                                          model.getAllItemsResponseModel!.data!
+                                          model.getAllItemsResponseModelList!
                                               .isNotEmpty)
-                                        ...model.getAllItemsResponseModel!.data!
+                                        ...model.getAllItemsResponseModelList!
                                             .where((value) => value.name!
                                                 .toLowerCase()
                                                 .contains(query.toLowerCase()))
@@ -312,12 +314,13 @@ class _POSScreenState extends State<POSScreen> {
                                             .map((e) => salesContWidget(d: e))
                                       else if (model.getAllItemsResponseModel !=
                                               null &&
-                                          model.getAllItemsResponseModel!.data!
+                                          model.getAllItemsResponseModelList!
                                               .isNotEmpty)
-                                        ...model.getAllItemsResponseModel!.data!
+                                        ...model.getAllItemsResponseModelList!
                                             .map((e) => salesContWidget(d: e))
-                                      else if (model.getAllItemsResponseModel!
-                                              .data!.isEmpty &&
+                                      else if (model
+                                              .getAllItemsResponseModelList!
+                                              .isEmpty &&
                                           model.getAllItemsList.isEmpty)
                                         TextView(text: 'No Item')
                                     ],

@@ -58,7 +58,7 @@ class ApiError {
               } else if (apiErrorModel?.error['email'] != null) {
                 errorDescription = apiErrorModel?.error['email'][0];
               } else if (apiErrorModel?.error['username'] != null) {
-                errorDescription = apiErrorModel?.error['username6'][0];
+                errorDescription = apiErrorModel?.error['username'][0];
               } else if (apiErrorModel?.error['business_logo'] != null) {
                 errorDescription = apiErrorModel?.error['business_logo'][0];
               } else if (apiErrorModel?.error['description'] != null) {

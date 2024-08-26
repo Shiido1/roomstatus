@@ -1,3 +1,6 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:roomstatus/core/connect_end/view_model/auth_view_model.dart';
 import 'package:roomstatus/ui/screens/dashboard/reservation_screen.dart/reservation_detail/reservation_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,9 @@ import '../../../app_assets/image.dart';
 import '../../../widgets/text_widget.dart';
 
 class RoomReservationScreen extends StatelessWidget {
-  const RoomReservationScreen({super.key});
+   RoomReservationScreen({super.key});
+
+  RefreshController refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,119 +35,133 @@ class RoomReservationScreen extends StatelessWidget {
             });
           },
           builder: (_, BookingViewModel model, __) {
-            return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 32.w, horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  ViewModelBuilder<AuthViewModel>.reactive(
-                      viewModelBuilder: () => locator<AuthViewModel>(),
-                      disposeViewModel: false,
-                      onViewModelReady: (mode) async {
-                        await mode.profile(context);
-                      },
-                      builder: (_, AuthViewModel mode, __) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextView(
-                              text: 'Reservations',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 21.2.sp,
-                              color: AppColor.white,
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    AppImage.notification,
-                                    color: AppColor.white,
-                                  ),
-                                  SizedBox(
-                                    width: 20.w,
-                                  ),
-                                  mode.getProfileResponseModel?.data
-                                              ?.hotelLogo ==
-                                          null
-                                      ? GestureDetector(
-                                          onTap: () => mode
-                                              .displaylogoutModalBottomSheet(
-                                                  context),
-                                          child: Container(
-                                            padding: EdgeInsets.all(12.w),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: AppColor.white),
-                                              shape: BoxShape.circle,
-                                              color: AppColor.fadeddeepprimary,
-                                            ),
-                                            child: SvgPicture.asset(
-                                                AppImage.profile),
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          onTap: () => mode
-                                              .displaylogoutModalBottomSheet(
-                                                  context),
-                                          child: Container(
-                                            width: 44,
-                                            height: 44,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: NetworkImage(mode
-                                                          .getProfileResponseModel
-                                                          ?.data
-                                                          ?.hotelLogo ??
-                                                      ''),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                          ),
-                                        ),
-                                ],
+            return SmartRefresher(
+              controller: refreshController,
+              key: const PageStorageKey('storage_key_sales'),
+              enablePullUp: false,
+              enablePullDown: true,
+              onRefresh: () async {
+                await model.getBookings(context);
+                refreshController.refreshCompleted();
+              },
+              onLoading: () async {
+                await model.getBookings(context);
+                refreshController.loadComplete();
+              },
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 32.w, horizontal: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    ViewModelBuilder<AuthViewModel>.reactive(
+                        viewModelBuilder: () => locator<AuthViewModel>(),
+                        disposeViewModel: false,
+                        onViewModelReady: (mode) async {
+                          await mode.profile(context);
+                        },
+                        builder: (_, AuthViewModel mode, __) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextView(
+                                text: 'Reservations',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 21.2.sp,
+                                color: AppColor.white,
                               ),
-                            )
-                          ],
-                        );
-                      }),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  if (model.isLoading ||
-                      model.getAllBookingsResponsemodel == null)
-                    const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.white,
-                      ),
+                              SizedBox(
+                                width: 100,
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      AppImage.notification,
+                                      color: AppColor.white,
+                                    ),
+                                    SizedBox(
+                                      width: 20.w,
+                                    ),
+                                    mode.getProfileResponseModel?.data
+                                                ?.hotelLogo ==
+                                            null
+                                        ? GestureDetector(
+                                            onTap: () => mode
+                                                .displaylogoutModalBottomSheet(
+                                                    context),
+                                            child: Container(
+                                              padding: EdgeInsets.all(12.w),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: AppColor.white),
+                                                shape: BoxShape.circle,
+                                                color: AppColor.fadeddeepprimary,
+                                              ),
+                                              child: SvgPicture.asset(
+                                                  AppImage.profile),
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: () => mode
+                                                .displaylogoutModalBottomSheet(
+                                                    context),
+                                            child: Container(
+                                              width: 44,
+                                              height: 44,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    image: NetworkImage(mode
+                                                            .getProfileResponseModel
+                                                            ?.data
+                                                            ?.hotelLogo ??
+                                                        ''),
+                                                    fit: BoxFit.cover),
+                                              ),
+                                            ),
+                                          ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          );
+                        }),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    if (model.isLoading ||
+                        model.getAllBookingsResponsemodel == null)
+                      const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.white,
+                        ),
+                      )
+                    else if (model.getAllBookingsResponsemodel!.bookings!.isEmpty)
+                      Center(
+                        child: TextView(
+                          text: 'No History',
+                          fontSize: 20.sp,
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )
+                    else if (model.getAllBookingsResponsemodel != null &&
+                        model.getAllBookingsResponsemodel!.bookings!.isNotEmpty)
+                      ...model.getAllBookingsResponsemodel!.bookings!.reversed
+                          .map((e) => reversedContent(
+                                code: e.code ?? '',
+                                customerName: e.customer ?? '',
+                                phn: e.phone ?? '',
+                                image: e.image ?? '',
+                                checkIn: e.checkedIn ?? '',
+                                checkOut: e.checkedOut ?? '',
+                              )),
+                    SizedBox(
+                      height: 30.h,
                     )
-                  else if (model.getAllBookingsResponsemodel!.bookings!.isEmpty)
-                    Center(
-                      child: TextView(
-                        text: 'No History',
-                        fontSize: 20.sp,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    )
-                  else if (model.getAllBookingsResponsemodel != null &&
-                      model.getAllBookingsResponsemodel!.bookings!.isNotEmpty)
-                    ...model.getAllBookingsResponsemodel!.bookings!.reversed
-                        .map((e) => reversedContent(
-                              code: e.code ?? '',
-                              customerName: e.customer ?? '',
-                              phn: e.phone ?? '',
-                              image: e.image ?? '',
-                              checkIn: e.checkedIn ?? '',
-                              checkOut: e.checkedOut ?? '',
-                            )),
-                  SizedBox(
-                    height: 30.h,
-                  )
-                ],
+                  ],
+                ),
               ),
             );
           }),
