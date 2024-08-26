@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roomstatus/core/core_folder/app/app.router.dart';
+import 'package:roomstatus/main.dart';
+import 'package:roomstatus/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/core_folder/app/app.locator.dart';
@@ -195,8 +198,9 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                     buttonWidth: double.infinity,
                                     buttonColor: AppColor.transparent,
                                     buttonBorderColor: AppColor.white,
-                                    onPressed: () =>
-                                        model.printReceiptWidget()),
+                                    onPressed: () => navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
+                                        // model.printReceiptWidget()
+                                        ),
                                 SizedBox(
                                   height: 16.0.h,
                                 ),

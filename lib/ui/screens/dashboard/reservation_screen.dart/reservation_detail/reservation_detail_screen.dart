@@ -8,9 +8,12 @@ import 'package:stacked/stacked.dart';
 import '../../../../../core/connect_end/view_model/booking_view_model.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/core_folder/app/app.locator.dart';
+import '../../../../../core/core_folder/app/app.router.dart';
+import '../../../../../main.dart';
 import '../../../../app_assets/app_color.dart';
 import '../../../../app_assets/image.dart';
 import '../../../../widgets/text_widget.dart';
+import '../../dashboard_screen.dart';
 
 // ignore: must_be_immutable
 class ReservationDetails extends StatelessWidget {
@@ -362,7 +365,9 @@ class ReservationDetails extends StatelessWidget {
                             buttonWidth: double.infinity,
                             buttonColor: AppColor.transparent,
                             buttonBorderColor: AppColor.white,
-                            onPressed: () => model.printReceiptWidget()),
+                            onPressed: () => navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
+                            // model.printReceiptWidget()
+                            ),
                       ],
                     ),
             );
