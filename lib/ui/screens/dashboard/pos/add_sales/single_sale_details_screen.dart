@@ -81,7 +81,7 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                       color: AppColor.white,
                                     ),
                                     SizedBox(
-                                      width: 100,
+                                      // width: 100,
                                       child: Row(
                                         children: [
                                           GestureDetector(

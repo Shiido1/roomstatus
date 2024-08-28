@@ -103,29 +103,33 @@ class _HomeRoomReservationScreenState extends State<HomeRoomReservationScreen>
                                       model.getProfileResponseModel!.data!
                                               .image ==
                                           null
-                                  ? Container(
-                                      padding: EdgeInsets.all(6.4.w),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 3.w,
-                                              color: AppColor.white),
-                                          shape: BoxShape.circle),
-                                      child: TextView(
-                                        text: getInitials(
-                                            string: model
-                                                    .getProfileResponseModel
-                                                    ?.data
-                                                    ?.hotel
-                                                    ?.toUpperCase() ??
-                                                '',
-                                            limitTo: 1),
-                                        fontWeight: FontWeight.w700,
-                                        maxLines: 1,
-                                        color: AppColor.white,
-                                        textOverflow: TextOverflow.fade,
-                                        fontSize: 24.sp,
+                                  ? GestureDetector(
+                                    onTap:()=> model.displaylogoutModalBottomSheet(
+                                              context),
+                                    child: Container(
+                                        padding: EdgeInsets.all(6.4.w),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 3.w,
+                                                color: AppColor.white),
+                                            shape: BoxShape.circle),
+                                        child: TextView(
+                                          text: getInitials(
+                                              string: model
+                                                      .getProfileResponseModel
+                                                      ?.data
+                                                      ?.hotel
+                                                      ?.toUpperCase() ??
+                                                  '',
+                                              limitTo: 1),
+                                          fontWeight: FontWeight.w700,
+                                          maxLines: 1,
+                                          color: AppColor.white,
+                                          textOverflow: TextOverflow.fade,
+                                          fontSize: 24.sp,
+                                        ),
                                       ),
-                                    )
+                                  )
                                   : GestureDetector(
                                       onTap: () =>
                                           model.displaylogoutModalBottomSheet(
@@ -182,7 +186,7 @@ class _HomeRoomReservationScreenState extends State<HomeRoomReservationScreen>
                           ),
                         ]),
                     SizedBox(
-                      height: 540,
+                      height:MediaQuery.of(context).size.height*.75,
                       child: TabBarView(
                         controller: tabController,
                         children: const [

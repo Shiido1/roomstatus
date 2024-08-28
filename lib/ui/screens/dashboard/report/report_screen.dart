@@ -1,3 +1,4 @@
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:roomstatus/ui/app_assets/app_utils.dart';
 import 'package:roomstatus/ui/app_assets/image.dart';
 import 'package:roomstatus/ui/screens/dashboard/report/payment/guest_list/guest_list_screen.dart';
@@ -56,25 +57,28 @@ class _ReportScreenState extends State<ReportScreen> {
               fontSize: 21.2.sp,
               color: AppColor.white,
             ),
-            GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .75,
+              child: MasonryGridView.builder(
+                gridDelegate:
+                    const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisExtent: 200,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 20 // ** add this **
-                  ),
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              children: [
-                ...mapList.map((e) => reportContent(
-                    text: e['text'],
-                    svg: e['svg'],
-                    color: e['color'],
-                    v: () {
-                      onTapReportWidget(e['text']);
-                    }))
-              ],
-            )
+                ),
+                itemCount: mapList.length,
+                itemBuilder: (context, index) {
+                  return reportContent(
+                      text: mapList[index]['text'],
+                      svg: mapList[index]['svg'],
+                      color: mapList[index]['color'],
+                      v: () {
+                        onTapReportWidget(mapList[index]['text']);
+                      });
+                },
+              ),
+            ),
+            SizedBox(
+              height: 22.h,
+            ),
           ],
         ),
       ),
@@ -107,39 +111,41 @@ class _ReportScreenState extends State<ReportScreen> {
           required Function() v}) =>
       GestureDetector(
         onTap: v,
-        child: Container(
-          height: 192.h,
-          width: 174.w,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: color),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 52.8.w, bottom: 26.0.w),
-                padding: EdgeInsets.all(18.w),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColor.primaryGrey1.withOpacity(.36),
-                ),
-                child: SizedBox(
-                  child: SvgPicture.asset(
-                    svg,
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Container(
+            padding: EdgeInsets.all(10.w),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: color),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 52.8.w, bottom: 26.0.w),
+                  padding: EdgeInsets.all(18.w),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.primaryGrey1.withOpacity(.36),
+                  ),
+                  child: SizedBox(
+                    child: SvgPicture.asset(
+                      svg,
+                    ),
                   ),
                 ),
-              ),
-              Center(
-                child: SizedBox(
-                  width: 140.w,
-                  child: TextView(
-                    textAlign: TextAlign.center,
-                    text: text,
-                    maxLines: 2,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15.2.sp,
+                Center(
+                  child: SizedBox(
+                    width: 140.w,
+                    child: TextView(
+                      textAlign: TextAlign.center,
+                      text: text,
+                      maxLines: 2,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.2.sp,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

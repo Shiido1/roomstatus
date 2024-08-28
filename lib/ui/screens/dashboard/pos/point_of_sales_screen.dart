@@ -168,7 +168,7 @@ class _POSScreenState extends State<POSScreen> {
                         ),
                   model.isLoading! || model.getAllItemsResponseModel == null
                       ? SizedBox(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height*.6,
                           child: GridView.count(
                             padding: EdgeInsets.only(top: 16.0.w),
                             crossAxisCount: 3,
@@ -209,7 +209,7 @@ class _POSScreenState extends State<POSScreen> {
                           ),
                         )
                       : SizedBox(
-                          height: 500.h,
+                          height: MediaQuery.of(context).size.height*.5,
                           child: SmartRefresher(
                             key: const PageStorageKey('storage_key_items'),
                             enablePullUp: true,
@@ -267,9 +267,10 @@ class _POSScreenState extends State<POSScreen> {
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
-                                            mainAxisExtent: 216,
+                                            mainAxisExtent: 220,
                                             crossAxisSpacing: 20,
-                                            mainAxisSpacing: 0 // ** add this **
+                                            mainAxisSpacing:
+                                                10 // ** add this **
                                             ),
                                     shrinkWrap: true,
                                     physics: const ClampingScrollPhysics(),
@@ -296,13 +297,15 @@ class _POSScreenState extends State<POSScreen> {
                                     ],
                                   )
                                 : GridView(
-                                    padding: EdgeInsets.only(top: 16.0.w),
+                                    padding: EdgeInsets.only(
+                                        top: 16.0.w,),
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
-                                            mainAxisExtent: 216,
+                                            mainAxisExtent: 240,
                                             crossAxisSpacing: 20,
-                                            mainAxisSpacing: 0 // ** add this **
+                                            mainAxisSpacing:
+                                                10 // ** add this **
                                             ),
                                     shrinkWrap: true,
                                     physics: const ClampingScrollPhysics(),
@@ -340,9 +343,7 @@ class _POSScreenState extends State<POSScreen> {
               transition: Transition.fade,
               duration: const Duration(seconds: 2));
         },
-        child: Column(
-          children: [
-            Container(
+        child: Container(
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColor.white, width: 2)),
@@ -351,31 +352,5 @@ class _POSScreenState extends State<POSScreen> {
                 backgroundImage: NetworkImage(d.image ?? ''),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 250.w,
-                  child: TextView(
-                    maxLines: 2,
-                    text: d.name!,
-                    textAlign: TextAlign.center,
-                    textOverflow: TextOverflow.fade,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.2.sp,
-                    color: AppColor.white,
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                TextView(
-                  text: '${getCurrency()}${oCcy.format(d.price)}',
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.white,
-                  fontSize: 13.2.sp,
-                ),
-              ],
-            )
-          ],
-        ),
       );
 }
