@@ -27,11 +27,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>RoomStatus needs Camera permission to function</string>
+	<string>RoomStatus needs Camera to register hotel logos or images so users can have it displayed on their profile</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>RoomStatus needs Microphone permission to function</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>RoomStatus needs access to your gallery to continue</string>
+	<string>RoomStatus needs access to your gallery to register hotel logos or images so users can have it displayed on their profile</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
