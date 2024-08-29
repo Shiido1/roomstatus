@@ -76,13 +76,13 @@ class RoomReservationScreen extends StatelessWidget {
                                 width: 100,
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset(
-                                      AppImage.notification,
-                                      color: AppColor.white,
-                                    ),
-                                    SizedBox(
-                                      width: 20.w,
-                                    ),
+                                    // SvgPicture.asset(
+                                    //   AppImage.notification,
+                                    //   color: AppColor.white,
+                                    // ),
+                                    // SizedBox(
+                                    //   width: 20.w,
+                                    // ),
                                     mode.getProfileResponseModel?.data
                                                 ?.hotelLogo ==
                                             null

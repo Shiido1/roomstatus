@@ -168,6 +168,7 @@ class TextFormWidget extends StatelessWidget {
           onChanged: onChange,
           onFieldSubmitted: onEditCompleted,
           validator: validator,
+          style:TextStyle(fontSize:20.sp,fontWeight: FontWeight.w500)
         ),
       ],
     );
