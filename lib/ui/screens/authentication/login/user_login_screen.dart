@@ -74,7 +74,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                       TextFormWidget(
                         hint: 'Hotel Code',
                         hintColor: AppColor.white,
-                        label: 'Select service',
+                        label: '',
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 15.2.sp,

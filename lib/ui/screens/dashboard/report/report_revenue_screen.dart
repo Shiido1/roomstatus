@@ -154,7 +154,7 @@ class _ReportRevenueState extends State<ReportRevenue> {
                         //         children: [
                         //           TextFormWidget(
                         //             hint: 'Hall',
-                        //             label: 'Select Service',
+                        //             label: '',
                         //             hintColor: AppColor.white,
                         //             labelStyle: TextStyle(
                         //                 fontWeight: FontWeight.w400,
@@ -240,7 +240,7 @@ class _ReportRevenueState extends State<ReportRevenue> {
                                   children: [
                                     TextFormWidget(
                                         hint: 'Sales',
-                                        label: 'Select Service',
+                                        label: '',
                                         hintColor: AppColor.white,
                                         labelStyle: TextStyle(
                                             fontWeight: FontWeight.w400,
@@ -518,7 +518,7 @@ class _ReportRevenueState extends State<ReportRevenue> {
                                 : Column(children: [
                                     TextFormWidget(
                                         hint: 'Room',
-                                        label: 'Select Service',
+                                        label: '',
                                         hintColor: AppColor.white,
                                         labelStyle: TextStyle(
                                             fontWeight: FontWeight.w400,

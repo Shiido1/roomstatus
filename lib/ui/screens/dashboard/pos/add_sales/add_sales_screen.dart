@@ -256,7 +256,7 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                             children: [
                               TextFormWidget(
                                 hint: 'Customer Type',
-                                label: 'Select Service',
+                                label: '',
                                 hintColor: AppColor.white,
                                 labelStyle: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -328,7 +328,7 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                                               ),
                                               TextFormWidget(
                                                 hint: 'Select Room',
-                                                label: 'Select Service',
+                                                label: '',
                                                 hintColor: AppColor.white,
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.w400,
@@ -420,7 +420,7 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                                       children: [
                                         TextFormWidget(
                                           hint: 'Mode of Payment',
-                                          label: 'Select Service',
+                                          label: '',
                                           hintColor: AppColor.white,
                                           labelStyle: TextStyle(
                                               fontWeight: FontWeight.w400,
@@ -498,7 +498,7 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                               ),
                               TextFormWidget(
                                 hint: 'Discount (%)',
-                                label: 'Select Service',
+                                label: '',
                                 hintColor: AppColor.white,
                                 keyboardType: TextInputType.number,
                                 labelStyle: TextStyle(

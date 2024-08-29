@@ -126,7 +126,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormWidget(
                         hint: 'Hotel Name',
-                        label: 'Select Service',
+                        label: '',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -142,7 +142,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormWidget(
                         hint: 'Country',
-                        label: 'Select Service',
+                        label: 'Type first three letters',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -270,7 +270,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormWidget(
                         hint: 'State/Province',
-                        label: 'Select Service',
+                        label: 'Tap drop down icon',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -396,7 +396,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormWidget(
                         hint: 'City/Town',
-                        label: 'Select Service',
+                        label: 'Tap drop down icon',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -520,7 +520,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormWidget(
                         hint: 'Address',
-                        label: 'Select Service',
+                        label: 'Type Address',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,

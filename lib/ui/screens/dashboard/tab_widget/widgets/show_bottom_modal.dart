@@ -217,7 +217,7 @@ void displayEditModalBottomSheet({BuildContext? context, String? code}) {
                                 ),
                                 TextFormWidget(
                                   hint: 'Discount (%)',
-                                  label: 'Select Service',
+                                  label: '',
                                   hintColor: AppColor.white,
                                   keyboardType: TextInputType.number,
                                   labelStyle: TextStyle(
@@ -234,7 +234,7 @@ void displayEditModalBottomSheet({BuildContext? context, String? code}) {
                                 ),
                                 TextFormWidget(
                                   hint: 'Amount Paid',
-                                  label: 'Select Service',
+                                  label: '',
                                   hintColor: AppColor.white,
                                   keyboardType: TextInputType.number,
                                   labelStyle: TextStyle(
@@ -260,7 +260,7 @@ void displayEditModalBottomSheet({BuildContext? context, String? code}) {
                                         children: [
                                           TextFormWidget(
                                             hint: 'Mode of Payment',
-                                            label: 'Select Service',
+                                            label: '',
                                             hintColor: AppColor.white,
                                             labelStyle: TextStyle(
                                                 fontWeight: FontWeight.w400,

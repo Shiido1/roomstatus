@@ -1094,7 +1094,7 @@ class SalesViewModel extends BaseViewModel {
                                 children: [
                                   TextFormWidget(
                                     hint: 'Customer Type',
-                                    label: 'Select Service',
+                                    label: '',
                                     hintColor: AppColor.white,
                                     labelStyle: TextStyle(
                                         fontWeight: FontWeight.w400,
@@ -1169,7 +1169,7 @@ class SalesViewModel extends BaseViewModel {
                                                 children: [
                                                   TextFormWidget(
                                                     hint: 'Select Room',
-                                                    label: 'Select Service',
+                                                    label: '',
                                                     hintColor: AppColor.white,
                                                     labelStyle: TextStyle(
                                                         fontWeight:
@@ -1271,7 +1271,7 @@ class SalesViewModel extends BaseViewModel {
                                           children: [
                                             TextFormWidget(
                                               hint: 'Mode of Payment',
-                                              label: 'Select Service',
+                                              label: '',
                                               hintColor: AppColor.white,
                                               labelStyle: TextStyle(
                                                   fontWeight: FontWeight.w400,
@@ -1358,7 +1358,7 @@ class SalesViewModel extends BaseViewModel {
                                   ),
                                   TextFormWidget(
                                     hint: 'Total Price',
-                                    label: 'Select Service',
+                                    label: '',
                                     hintColor: AppColor.white,
                                     keyboardType: TextInputType.number,
                                     labelStyle: TextStyle(

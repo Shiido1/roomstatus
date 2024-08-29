@@ -101,7 +101,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                         hint: 'First Name',
-                        label: 'Select Service',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -117,7 +116,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                         hint: 'Last Name',
-                        label: 'Select Service',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -133,7 +131,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                         hint: 'Telephone',
-                        label: 'Select Service',
                         hintColor: AppColor.white,
                         keyboardType: TextInputType.number,
                         labelStyle: TextStyle(
@@ -150,7 +147,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                         hint: 'Email Address',
-                        label: 'Select Service',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -166,7 +162,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                           hint: 'Password',
-                          label: 'Select Service',
                           hintColor: AppColor.white,
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -187,7 +182,6 @@ class CreateAccountSecondScreen extends StatelessWidget
                       ),
                       TextFormWidget(
                         hint: 'Confirm Password',
-                        label: 'Select Service',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,

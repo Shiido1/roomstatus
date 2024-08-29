@@ -234,7 +234,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Discount (%)',
-                              label: 'Select Service',
+                              label: '',
                               keyboardType: TextInputType.number,
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
@@ -397,7 +397,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Amount Paid',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -414,7 +414,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                               children: [
                                 TextFormWidget(
                                   hint: 'Mode of Payment',
-                                  label: 'Select Service',
+                                  label: '',
                                   labelStyle: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 15.2.sp,

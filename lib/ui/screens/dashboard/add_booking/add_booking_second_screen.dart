@@ -260,7 +260,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'First Name',
-                              label: 'Select service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -275,7 +275,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Last Name',
-                              label: 'Select service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -290,7 +290,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Telephone',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -306,7 +306,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Email Address',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -321,7 +321,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Customer\'s ID',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -383,7 +383,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'ID Card Number',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -398,7 +398,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Customer\'s Gender',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -459,7 +459,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'State',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -526,7 +526,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'City Town',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -599,7 +599,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'Address',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,
@@ -614,7 +614,7 @@ class _AddBookingSecondScreenState extends State<AddBookingSecondScreen> {
                             ),
                             TextFormWidget(
                               hint: 'If Credit Customer, select Company',
-                              label: 'Select Service',
+                              label: '',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.2.sp,

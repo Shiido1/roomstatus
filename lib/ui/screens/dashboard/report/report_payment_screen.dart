@@ -105,7 +105,7 @@ class ReportPaymentScreen extends StatelessWidget {
                       ),
                       TextFormWidget(
                         hint: 'Amount',
-                        label: 'Select Service',
+                        label: '',
                         hintColor: AppColor.white,
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
