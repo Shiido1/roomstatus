@@ -77,7 +77,7 @@ class SalesViewModel extends BaseViewModel {
   GetAllSalesResponseModel? _getAllSalesResponseModel;
   List<Sale>? get getAllSalesResponseModelList => _getAllSalesResponseModelList;
   List<Sale>? _getAllSalesResponseModelList = [];
-  List<Sale>? _getAllSalesResponseModelListCopy;
+  List<Sale>? _getAllSalesResponseModelListCopy = [];
   AddSalesResponseModell? get addSalesResponseModel => _addSalesResponseModel;
   AddSalesResponseModell? _addSalesResponseModel;
   UpdateSalesResponseModel? get updateSalesResponseModel =>

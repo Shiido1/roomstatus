@@ -13,7 +13,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../core/core_folder/app/app.locator.dart';
 import '../../../app_assets/app_color.dart';
 import '../../../app_assets/image.dart';

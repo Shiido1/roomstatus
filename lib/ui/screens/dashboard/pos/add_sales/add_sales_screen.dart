@@ -182,24 +182,26 @@ class _AddSalesScreenState extends State<AddSalesScreen> {
                                       if (mode.getAllItemsResponseModel !=
                                               null &&
                                           mode.getAllItemsResponseModel!.data!
-                                              .isEmpty) {
+                                              .isEmpty||
+                                  mode.getAllItemsResponseModel!.data!
+                                      .isEmpty) {
                                         body = TextView(
                                             text: "You're caught up",
                                             color: AppColor.textColor);
-                                      } else if (mode == LoadStatus.idle &&
+                                      } else if (m == LoadStatus.idle &&
                                           mode.isLoadNoMore == false) {
                                         body = TextView(
                                           text: "Pull up load",
                                           color: AppColor.textColor,
                                         );
-                                      } else if (mode == LoadStatus.loading) {
+                                      } else if (m == LoadStatus.loading) {
                                         body =
                                             const CupertinoActivityIndicator();
-                                      } else if (mode == LoadStatus.failed) {
+                                      } else if (m == LoadStatus.failed) {
                                         body = TextView(
                                             text: "Load Failed!Click retry!",
                                             color: AppColor.textColor);
-                                      } else if (mode ==
+                                      } else if (m ==
                                           LoadStatus.canLoading) {
                                         body = TextView(
                                             text: "release to load more",
