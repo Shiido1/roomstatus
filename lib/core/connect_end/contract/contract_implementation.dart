@@ -1,3 +1,4 @@
+import 'package:roomstatus/core/connect_end/model/delete_account_response_model/delete_account_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_all_rooms_response_model/get_all_rooms_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_cities_response_model/get_cities_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_country_model/get_country_model.dart';
@@ -54,6 +55,9 @@ class AuthContractsImpl {
 
   Future<GetStatusResponseModel> status(String? date) async =>
       await _api.status(date!);
+
+  Future<DeleteAccountResponseModel> deleteAccount() async =>
+      await _api.deleteAccouunt();
 
   Future<dynamic> roomBooking(String? id) async => await _api.roomBookings(id!);
 }

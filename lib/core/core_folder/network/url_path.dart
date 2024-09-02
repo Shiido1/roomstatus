@@ -9,6 +9,7 @@ class UrlConfig {
   static const String state = 'v1/states';
   static const String city = 'v1/cities';
   static const String profile = 'v1/profile';
+  static const String deleteAccount = 'v1/account/delete';
 
   static const String get_all_rooms = 'v1/rooms';
   static const String get_room = 'v1/room';

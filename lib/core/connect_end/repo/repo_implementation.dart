@@ -1,3 +1,4 @@
+import 'package:roomstatus/core/connect_end/model/delete_account_response_model/delete_account_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_all_rooms_response_model/get_all_rooms_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_cities_response_model/get_cities_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_country_model/get_country_model.dart';
@@ -88,6 +89,11 @@ class AuthRepoImpl {
 
   Future<GetStatusResponseModel> status(String? date) async {
     final response = await _contract.status(date);
+    return response;
+  }
+
+  Future<DeleteAccountResponseModel> deleteAccount() async {
+    final response = await _contract.deleteAccount();
     return response;
   }
 }

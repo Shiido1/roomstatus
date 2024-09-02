@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:roomstatus/core/connect_end/model/delete_account_response_model/delete_account_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_all_rooms_response_model/get_all_rooms_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_country_model/datum.dart'
     as country;
@@ -295,6 +296,34 @@ class AuthViewModel extends BaseViewModel {
         await AppUtils.snackbar(contxt,
             message: _loginResponse?.message!.toString());
         Get.to(() => const Dashboard(),
+            transition: Transition.fadeIn,
+            duration: const Duration(seconds: 2));
+      }
+    } catch (e) {
+      _isLoading = false;
+      logger.d(e);
+      AppUtils.snackbar(contxt, message: e.toString(), error: true);
+    }
+    notifyListeners();
+  }
+  // delte account flow so api call for method can be called here
+
+  DeleteAccountResponseModel? _deleteAccountResponseModel;
+  DeleteAccountResponseModel? get deleteAccountResponseModel =>
+      _deleteAccountResponseModel;
+
+  Future<void> deleteAccount(contxt) async {
+    try {
+      _isLoading = true;
+      _deleteAccountResponseModel = await runBusyFuture(
+          repositoryImply.deleteAccount(),
+          throwException: true);
+
+      if (_deleteAccountResponseModel?.success == true) {
+        _isLoading = false;
+        await AppUtils.snackbar(contxt,
+            message: _deleteAccountResponseModel?.message!.toString());
+        Get.to(() => UserLoginScreen(),
             transition: Transition.fadeIn,
             duration: const Duration(seconds: 2));
       }
@@ -655,8 +684,8 @@ class AuthViewModel extends BaseViewModel {
             borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
         builder: (context) => DraggableScrollableSheet(
               expand: false,
-              initialChildSize: .2,
-              maxChildSize: .3,
+              initialChildSize: .3,
+              maxChildSize: .4,
               minChildSize: .1,
               builder:
                   (BuildContext context, ScrollController scrollController) =>
@@ -680,6 +709,17 @@ class AuthViewModel extends BaseViewModel {
                           onPressed: () {
                             SharedPreferencesService.instance.logOut();
                           }),
+                      SizedBox(
+                        height: 20.2.h,
+                      ),
+                      ButtonWidget(
+                          buttonText: 'Delete Account',
+                          color: AppColor.white,
+                          border: 24,
+                          buttonWidth: double.infinity,
+                          buttonColor: AppColor.primary1,
+                          buttonBorderColor: Colors.transparent,
+                          onPressed: () => deleteAccount(context)),
                       SizedBox(
                         height: 10.2.h,
                       ),

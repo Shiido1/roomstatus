@@ -1,3 +1,4 @@
+import 'package:roomstatus/core/connect_end/model/delete_account_response_model/delete_account_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_all_rooms_response_model/get_all_rooms_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_cities_response_model/get_cities_response_model.dart';
 import 'package:roomstatus/core/connect_end/model/get_country_model/get_country_model.dart';
@@ -45,6 +46,17 @@ class AuthApi {
           data: FormData.fromMap(loginEntity.toJson()));
       logger.d(response.data);
       return LoginResponseModel.fromJson(response.data);
+    } catch (e) {
+      logger.d("response:$e");
+      rethrow;
+    }
+  }
+
+  Future<DeleteAccountResponseModel> deleteAccouunt() async {
+    try {
+      final response = await _service.call(UrlConfig.deleteAccount, RequestMethod.delete,);
+      logger.d(response.data);
+      return DeleteAccountResponseModel.fromJson(response.data);
     } catch (e) {
       logger.d("response:$e");
       rethrow;
