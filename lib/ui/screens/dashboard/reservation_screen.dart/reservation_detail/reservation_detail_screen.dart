@@ -1,3 +1,4 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:roomstatus/ui/screens/dashboard/tab_widget/widgets/show_bottom_modal.dart';
 import 'package:roomstatus/ui/widgets/print_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -364,7 +365,21 @@ class ReservationDetails extends StatelessWidget {
                             buttonWidth: double.infinity,
                             buttonColor: AppColor.transparent,
                             buttonBorderColor: AppColor.white,
-                            onPressed: () => navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
+                            onPressed: () async {
+                              var isInstalled = await LaunchApp.isAppInstalled(
+                                androidPackageName:
+                                    'com.flutterwave.app', // Replace with the correct package name
+                              );
+                              if (isInstalled) {
+                                await LaunchApp.openApp(
+                                  androidPackageName:
+                                      'com.flutterwave.app', // Replace with the correct package name
+                                );
+                              } else {
+                                // Optional: Handle the case where the app is not installed.
+                              }
+                            }
+                            // navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
                             // model.printReceiptWidget()
                             ),
                       ],
