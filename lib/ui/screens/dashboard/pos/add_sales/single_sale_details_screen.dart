@@ -1,12 +1,8 @@
-import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:roomstatus/core/connect_end/view_model/sales_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roomstatus/core/core_folder/app/app.router.dart';
-import 'package:roomstatus/main.dart';
-import 'package:roomstatus/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/core_folder/app/app.locator.dart';
@@ -189,7 +185,7 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                   height: 32.h,
                                 ),
                                 PrintButtonWidget(
-                                    buttonText: 'Make Payment',
+                                    buttonText: 'Print',
                                     color: AppColor.white,
                                     border: 24,
                                     widget: SvgPicture.asset(
@@ -200,19 +196,8 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                     buttonColor: AppColor.transparent,
                                     buttonBorderColor: AppColor.white,
                                     onPressed: () async {
-                                      var isInstalled =
-                                          await LaunchApp.isAppInstalled(
-                                        androidPackageName:
-                                            'com.flutterwave.app', // Replace with the correct package name
-                                      );
-                                      if (isInstalled) {
-                                        await LaunchApp.openApp(
-                                          androidPackageName:
-                                              'com.flutterwave.app', // Replace with the correct package name
-                                        );
-                                      } else {
-                                        // Optional: Handle the case where the app is not installed.
-                                      }
+                                      //navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
+                                      model.printReceiptWidget();
                                     }
                                     // navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
                                     // model.printReceiptWidget()

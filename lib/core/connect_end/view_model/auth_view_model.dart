@@ -306,7 +306,7 @@ class AuthViewModel extends BaseViewModel {
     }
     notifyListeners();
   }
-  
+
   // delete account flow so api call for method can be called here
 
   DeleteAccountResponseModel? _deleteAccountResponseModel;
