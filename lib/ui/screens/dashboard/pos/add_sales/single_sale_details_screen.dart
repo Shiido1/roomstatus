@@ -1,3 +1,4 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:roomstatus/core/connect_end/view_model/sales_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -198,9 +199,24 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                     buttonWidth: double.infinity,
                                     buttonColor: AppColor.transparent,
                                     buttonBorderColor: AppColor.white,
-                                    onPressed: () => navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
-                                        // model.printReceiptWidget()
-                                        ),
+                                    onPressed: () async {
+                                      var isInstalled =
+                                          await LaunchApp.isAppInstalled(
+                                        androidPackageName:
+                                            'com.flutterwave.app', // Replace with the correct package name
+                                      );
+                                      if (isInstalled) {
+                                        await LaunchApp.openApp(
+                                          androidPackageName:
+                                              'com.flutterwave.app', // Replace with the correct package name
+                                        );
+                                      } else {
+                                        // Optional: Handle the case where the app is not installed.
+                                      }
+                                    }
+                                    // navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
+                                    // model.printReceiptWidget()
+                                    ),
                                 SizedBox(
                                   height: 16.0.h,
                                 ),

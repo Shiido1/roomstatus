@@ -577,36 +577,73 @@ class _ReportRevenueState extends State<ReportRevenue> {
                                                       ),
                                                     ),
                                                   ),
-                                                  ...model
-                                                      .allRoomsResponseModel!
-                                                      .data!
-                                                      .rooms!
-                                                      .map((o) => Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        10.w),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                widget.roomController
-                                                                        .text =
-                                                                    o.type!;
-                                                                id = o.id
-                                                                    .toString();
-                                                                onTap = false;
-                                                                setState(() {});
-                                                              },
-                                                              child: TextView(
-                                                                text: o.type ??
-                                                                    '',
-                                                                fontSize: 18.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
+                                                  if (model.allRoomsResponseModel!
+                                                              .data !=
+                                                          null &&
+                                                      model
+                                                          .allRoomsResponseModel!
+                                                          .data!
+                                                          .rooms!
+                                                          .isNotEmpty)
+                                                    ...model
+                                                        .allRoomsResponseModel!
+                                                        .data!
+                                                        .rooms!
+                                                        .map((o) => Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          10.w),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  widget.roomController
+                                                                          .text =
+                                                                      o.type!;
+                                                                  id = o.id
+                                                                      .toString();
+                                                                  onTap = false;
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                                child: Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width:
+                                                                          170.w,
+                                                                      child:
+                                                                          TextView(
+                                                                        text:
+                                                                            '${o.number}-${o.type}',
+                                                                        fontSize:
+                                                                            18.sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        textOverflow:
+                                                                            TextOverflow.ellipsis,
+                                                                        maxLines:
+                                                                            1,
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          2.w,
+                                                                    ),
+                                                                    TextView(
+                                                                      text:
+                                                                          '(${getCurrency()}${oCcy.format(o.price ?? 0)})',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      color: AppColor
+                                                                          .black,
+                                                                      fontSize:
+                                                                          18.2.sp,
+                                                                    )
+                                                                  ],
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ))
+                                                            ))
                                                 ],
                                               ),
                                             ),

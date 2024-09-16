@@ -52,7 +52,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   TextEditingController addressController = TextEditingController();
 
   GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
-
+  
   @override
   void initState() {
     _debouncer = Debouncer(delay: const Duration(milliseconds: 500));
