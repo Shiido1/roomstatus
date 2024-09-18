@@ -2,7 +2,6 @@ name: roomstatus
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-<<<<<<< HEAD
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -16,9 +15,6 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 version: 2.0.1
-=======
-version: 1.0.6
->>>>>>> 6f59f2b01a8067e645b5a3ccb7c3b782e1e11738
 
 environment:
   sdk: '>=3.3.4 <4.0.0'

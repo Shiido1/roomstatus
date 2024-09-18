@@ -6,6 +6,7 @@
     <application
         android:label="RoomStatus"
         android:name="${applicationName}"
+        android:allowBackup="false"
         android:icon="@drawable/appicon">
         <activity
             android:name=".MainActivity"
