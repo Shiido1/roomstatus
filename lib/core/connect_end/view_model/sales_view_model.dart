@@ -1,16 +1,14 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'package:intl/intl.dart';
 import 'package:roomstatus/core/connect_end/model/get_all_items_response_model/get_all_items_response_model.dart';
 import 'package:roomstatus/core/connect_end/repo/sales_repo_impl.dart';
 import 'package:roomstatus/core/core_folder/app/app.router.dart';
 import 'package:roomstatus/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:printing/printing.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
 import "package:collection/collection.dart";
@@ -37,9 +35,6 @@ import 'package:roomstatus/core/connect_end/model/add_sales_entity_model/item.da
     as add;
 import 'package:roomstatus/core/connect_end/model/single_sales_response_model/item.dart'
     as sales;
-
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 import 'booking_view_model.dart';
 
@@ -92,7 +87,7 @@ class SalesViewModel extends BaseViewModel {
   bool isLoadNoMore = false;
   bool isLoadNoMoreSales = false;
 
-  final pdf = pw.Document();
+  DateTime datenow = DateTime.now();
 
   GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
 
@@ -225,10 +220,17 @@ class SalesViewModel extends BaseViewModel {
   Future<void> getAllSales(contxt) async {
     try {
       _isLoading = true;
+
+      String formattedDate = DateFormat('dd-MM-yyyy').format(datenow);
       _getAllSalesResponseModel = await runBusyFuture(
-          repositoryImply.getAllSales(),
+          repositoryImply.getAllSales(page: pageAllSales.toString()),
           throwException: true);
-      _getAllSalesResponseModelList = _getAllSalesResponseModel!.data!.sales;
+      for (int i = 0; i < _getAllSalesResponseModel!.data!.sales!.length; i++) {
+        if (_getAllSalesResponseModel!.data!.sales![i].date == formattedDate) {
+          _getAllSalesResponseModelList!.add(_getAllSalesResponseModel!.data!.sales![i]);
+          notifyListeners();
+        }else{}
+      }
       _isLoading = false;
     } catch (e) {
       _isLoading = false;
@@ -248,14 +250,22 @@ class SalesViewModel extends BaseViewModel {
     if (_getAllSalesResponseModel!.data!.sales!.length <
         _getAllSalesResponseModel!.meta!.total!) {
       pageAllSales++;
+    
+      String formattedDate = DateFormat('dd-MM-yyyy').format(datenow);
       try {
         _getAllSalesResponseModel = await runBusyFuture(
-            repositoryImply.getAllSales(page: page.toString()));
+            repositoryImply.getAllSales(page: pageAllSales.toString()));
+          for (int i = 0; i < _getAllSalesResponseModel!.data!.sales!.length; i++) {
+        if (_getAllSalesResponseModel!.data!.sales![i].date == formattedDate) {
+         
         _getAllSalesResponseModelListCopy!
-            .addAll(_getAllSalesResponseModel!.data!.sales!);
+            .add(_getAllSalesResponseModel!.data!.sales![i]);
         _getAllSalesResponseModelList!
             .addAll(_getAllSalesResponseModelListCopy!);
         _getAllSalesResponseModelListCopy?.clear();
+          notifyListeners();
+        }else{}
+      }
       } catch (e) {
         rethrow;
       }
@@ -390,141 +400,6 @@ class SalesViewModel extends BaseViewModel {
     );
   }
 
-  printReceiptWidget() async {
-    pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.SizedBox(
-                  height: 20.h,
-                ),
-                pw.Text('Sales Detail',
-                    style: pw.TextStyle(
-                      fontWeight: pw.FontWeight.bold,
-                      fontSize: 51.2.sp,
-                    )),
-                pw.SizedBox(
-                  height: 20.h,
-                ),
-                pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Discount(%)',
-                            style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 32.2.sp,
-                            )),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                            singleSalesResponseModel!.items![0].discount == null
-                                ? '0'
-                                : singleSalesResponseModel!.items![0].discount
-                                    .toString(),
-                            style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 32.2.sp,
-                            )),
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 46.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Item:',
-                            style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 32.2.sp,
-                            )),
-                        pw.SizedBox(
-                          width: 400.w,
-                          child: pw.Text(
-                              loopString(singleSalesResponseModel!.items!),
-                              maxLines: 10,
-                              style: pw.TextStyle(
-                                fontWeight: pw.FontWeight.bold,
-                                fontSize: 33.2.sp,
-                              )),
-                        )
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 40.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Mode of Payment',
-                            style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 32.2.sp,
-                            )),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(singleSalesResponseModel?.modeOfPayment ?? '',
-                            style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 30.2.sp,
-                            )),
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 56.0.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Column(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          children: [
-                            pw.Text(singleSalesResponseModel?.code ?? '',
-                                style: pw.TextStyle(
-                                  fontWeight: pw.FontWeight.bold,
-                                  fontSize: 38.2.sp,
-                                )),
-                            pw.SizedBox(height: 30.h),
-                            pw.Text(singleSalesResponseModel?.customer ?? '',
-                                style: pw.TextStyle(
-                                  fontWeight: pw.FontWeight.bold,
-                                  fontSize: 32.2.sp,
-                                ))
-                          ],
-                        ),
-                        pw.Spacer(),
-                        pw.Row(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          mainAxisAlignment: pw.MainAxisAlignment.end,
-                          children: [
-                            pw.Text(
-                                'NGN${oCcy.format(sumUsingLoop(singleSalesResponseModel!.items!))}',
-                                style: pw.TextStyle(
-                                  fontWeight: pw.FontWeight.bold,
-                                  fontSize: 32.2.sp,
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 46.0.h,
-                    ),
-                  ],
-                )
-              ]);
-        }));
-    printerCall();
-  }
-
   int sumUsingLoop(List<sales.Item> numbers) {
     int sum = 0;
     for (var number in numbers) {
@@ -539,11 +414,6 @@ class SalesViewModel extends BaseViewModel {
       quantityAndItems += '${q.quantity} ${q.item}, ';
     }
     return quantityAndItems;
-  }
-
-  void printerCall() async {
-    await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async => pdf.save());
   }
 
   body(context,

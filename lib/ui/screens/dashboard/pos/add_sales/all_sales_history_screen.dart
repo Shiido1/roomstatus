@@ -25,7 +25,7 @@ class AllSalesHistoryScreen extends StatefulWidget {
 }
 
 class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
-  RefreshController? refreshControllerState = RefreshController();
+  RefreshController? refreshControllerSales = RefreshController();
 
   String query = '';
 
@@ -41,6 +41,10 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
               model.getAllSales(context);
             });
           },
+          onDispose: (viewModel) {
+            viewModel.getAllSalesResponseModelList!.clear();
+            viewModel.pageAllSales = 1;
+          },
           builder: (_, SalesViewModel model, __) {
             return SmartRefresher(
               key: const PageStorageKey('storage_key_sales'),
@@ -50,13 +54,13 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                 await model.onRefreshAllSales();
                 // ignore: use_build_context_synchronously
                 model.getAllSales(context);
-                refreshControllerState?.refreshCompleted();
+                refreshControllerSales?.refreshCompleted();
               },
               onLoading: () async {
                 await model.onLoadingAllSales();
-                refreshControllerState?.loadComplete();
+                refreshControllerSales?.loadComplete();
               },
-              controller: refreshControllerState!,
+              controller: refreshControllerSales!,
               footer: CustomFooter(builder: ((context, mode) {
                 Widget body;
                 if (model.getAllSalesResponseModel != null &&
@@ -144,8 +148,7 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                           color: AppColor.white,
                         ),
                       )
-                    else if (model
-                        .getAllSalesResponseModel!.data!.sales!.isEmpty)
+                    else if (model.getAllSalesResponseModelList!.isEmpty)
                       Center(
                         child: TextView(
                           text: 'No History',
@@ -155,13 +158,13 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                         ),
                       )
                     else if (model.getAllSalesResponseModel != null &&
-                        model.getAllSalesResponseModel!.data!.sales!.isNotEmpty)
+                        model.getAllSalesResponseModelList!.isNotEmpty)
                       query != ''
                           ? Column(
                               children: [
-                                ...model.getAllSalesResponseModel!.data!.sales!
-                                    .reversed
-                                    .where((element) => element.customer!
+                                ...model.getAllSalesResponseModelList!.reversed
+                                    .where((element) => element.total
+                                        .toString()
                                         .toLowerCase()
                                         .contains(query.toLowerCase()))
                                     .map((e) => reversedContent(
@@ -171,8 +174,7 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                             )
                           : Column(
                               children: [
-                                ...model.getAllSalesResponseModel!.data!.sales!
-                                    .reversed
+                                ...model.getAllSalesResponseModelList!.reversed
                                     .map((e) => reversedContent(
                                           e,
                                         ))
@@ -227,7 +229,7 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                   width: 2.w,
                 ),
                 TextView(
-                  text: sales.code ?? '',
+                  text: sales.date ?? '',
                   maxLines: 1,
                   textOverflow: TextOverflow.clip,
                   fontSize: 11.2.sp,
@@ -236,38 +238,6 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
                 SizedBox(
                   height: 12.w,
                 ),
-                // Row(
-                //   children: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         Container(
-                //           padding: EdgeInsets.only(
-                //               left: 8.w, right: 8.w, top: 3.4.w, bottom: 3.4.w),
-                //           decoration: BoxDecoration(
-                //               color: AppColor.primary,
-                //               borderRadius: BorderRadius.circular(22)),
-                //           child: TextView(
-                //             text: 'Unit Price',
-                //             maxLines: 1,
-                //             textOverflow: TextOverflow.clip,
-                //             fontSize: 10.2.sp,
-                //             color: AppColor.white,
-                //             fontWeight: FontWeight.w800,
-                //           ),
-                //         ),
-                //         SizedBox(
-                //           height: 4.h,
-                //         ),
-                //         TextView(
-                //           text:
-                //               '${getCurrency()}${oCcy.format(sales.total ?? 0)}',
-                //           fontSize: 13.2.sp,
-                //           color: AppColor.black,
-                //           fontWeight: FontWeight.w700,
-                //         ),
-                //       ],
-                //     ),
                 SizedBox(
                   width: 20.w,
                 ),
@@ -312,17 +282,15 @@ class _AllSalesHistoryScreenState extends State<AllSalesHistoryScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // ClipRRect(
-                //   borderRadius: BorderRadius.circular(8.0),
-                //   child: Image.network(
-                //     sales.image ?? '',
-                //     fit: BoxFit.cover,
-                //     height: 52.h,
-                //     width: 70.w,
-                //   ),
-                // ),
+                TextView(
+                  text: sales.code ?? '',
+                  maxLines: 1,
+                  textOverflow: TextOverflow.clip,
+                  fontSize: 13.2.sp,
+                  fontWeight: FontWeight.w500,
+                ),
                 SizedBox(
-                  height: 20.w,
+                  height: 14.w,
                 ),
                 Container(
                   padding: EdgeInsets.only(

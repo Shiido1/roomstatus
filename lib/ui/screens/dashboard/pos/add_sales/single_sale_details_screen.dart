@@ -1,16 +1,14 @@
-import 'package:external_app_launcher/external_app_launcher.dart';
+import 'package:get/get.dart';
 import 'package:roomstatus/core/connect_end/view_model/sales_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roomstatus/core/core_folder/app/app.router.dart';
-import 'package:roomstatus/main.dart';
-import 'package:roomstatus/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/core_folder/app/app.locator.dart';
 import '../../../../app_assets/app_color.dart';
+import '../../../../app_assets/app_utils.dart';
 import '../../../../app_assets/image.dart';
 import '../../../../widgets/print_button_widget.dart';
 import '../../../../widgets/text_widget.dart';
@@ -200,23 +198,15 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                     buttonColor: AppColor.transparent,
                                     buttonBorderColor: AppColor.white,
                                     onPressed: () async {
-                                      var isInstalled =
-                                          await LaunchApp.isAppInstalled(
-                                        androidPackageName:
-                                            'com.flutterwave.app', // Replace with the correct package name
-                                      );
-                                      if (isInstalled) {
-                                        await LaunchApp.openApp(
-                                          androidPackageName:
-                                              'com.flutterwave.app', // Replace with the correct package name
-                                        );
-                                      } else {
-                                        // Optional: Handle the case where the app is not installed.
-                                      }
-                                    }
-                                    // navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
-                                    // model.printReceiptWidget()
-                                    ),
+                                      Clipboard.setData(ClipboardData(
+                                          text: "${model
+                                              .sumUsingLoop(model
+                                                  .singleSalesResponseModel!
+                                                  .items!)}00"));
+                                      await AppUtils.snackbar(context,
+                                          message: 'Price Copied..!');
+                                      Get.back();
+                                    }),
                                 SizedBox(
                                   height: 16.0.h,
                                 ),

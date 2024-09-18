@@ -1,4 +1,5 @@
-import 'package:external_app_launcher/external_app_launcher.dart';
+import 'package:get/get.dart';
+import 'package:roomstatus/ui/app_assets/app_utils.dart';
 import 'package:roomstatus/ui/screens/dashboard/tab_widget/widgets/show_bottom_modal.dart';
 import 'package:roomstatus/ui/widgets/print_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,22 +10,21 @@ import 'package:stacked/stacked.dart';
 import '../../../../../core/connect_end/view_model/booking_view_model.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/core_folder/app/app.locator.dart';
-import '../../../../../core/core_folder/app/app.router.dart';
-import '../../../../../main.dart';
 import '../../../../app_assets/app_color.dart';
 import '../../../../app_assets/image.dart';
 import '../../../../widgets/text_widget.dart';
-import '../../dashboard_screen.dart';
 
 // ignore: must_be_immutable
 class ReservationDetails extends StatelessWidget {
   ReservationDetails({super.key, required this.code, required this.image});
   String? code;
   String? image;
+  final key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       backgroundColor: const Color.fromARGB(255, 238, 102, 93),
       body: ViewModelBuilder<BookingViewModel>.reactive(
           viewModelBuilder: () => locator<BookingViewModel>(),
@@ -366,22 +366,14 @@ class ReservationDetails extends StatelessWidget {
                             buttonColor: AppColor.transparent,
                             buttonBorderColor: AppColor.white,
                             onPressed: () async {
-                              var isInstalled = await LaunchApp.isAppInstalled(
-                                androidPackageName:
-                                    'com.flutterwave.app', // Replace with the correct package name
-                              );
-                              if (isInstalled) {
-                                await LaunchApp.openApp(
-                                  androidPackageName:
-                                      'com.flutterwave.app', // Replace with the correct package name
-                                );
-                              } else {
-                                // Optional: Handle the case where the app is not installed.
-                              }
-                            }
-                            // navigate.clearStackAndShow(Routes.dashboard, arguments: const Dashboard())
-                            // model.printReceiptWidget()
-                            ),
+                              Clipboard.setData(ClipboardData(
+                                  text: "${model.showBookingResponseModel?.data
+                                          ?.amountPaid}00"
+                                    ));
+                             await AppUtils.snackbar(context,
+                                  message: 'Price Copied..!');
+                                Get.back();
+                            }),
                       ],
                     ),
             );

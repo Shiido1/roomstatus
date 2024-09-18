@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:io';
+
 import 'package:roomstatus/core/connect_end/model/get_all_items_response_model/datum.dart';
 import 'package:roomstatus/core/connect_end/view_model/sales_view_model.dart';
 import 'package:roomstatus/ui/screens/dashboard/pos/add_sales/add_sales_screen.dart';
@@ -12,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:stacked/stacked.dart';
-
+import '../../../../core/constants.dart';
 import '../../../../core/core_folder/app/app.locator.dart';
 import '../../../app_assets/app_color.dart';
 import '../../../app_assets/image.dart';
@@ -167,7 +169,7 @@ class _POSScreenState extends State<POSScreen> {
                         ),
                   model.isLoading! || model.getAllItemsResponseModel == null
                       ? SizedBox(
-                          height: MediaQuery.of(context).size.height*.6,
+                          height: MediaQuery.of(context).size.height * .6,
                           child: GridView.count(
                             padding: EdgeInsets.only(top: 16.0.w),
                             crossAxisCount: 3,
@@ -208,7 +210,9 @@ class _POSScreenState extends State<POSScreen> {
                           ),
                         )
                       : SizedBox(
-                          height: MediaQuery.of(context).size.height*.5,
+                          height: Platform.isIOS
+                              ? MediaQuery.of(context).size.height * .5
+                              : MediaQuery.of(context).size.height * .59,
                           child: SmartRefresher(
                             key: const PageStorageKey('storage_key_items'),
                             enablePullUp: true,
@@ -264,9 +268,10 @@ class _POSScreenState extends State<POSScreen> {
                                 ? GridView(
                                     padding: EdgeInsets.only(top: 16.0.w),
                                     gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                        SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
-                                            mainAxisExtent: 220,
+                                            mainAxisExtent:
+                                                Platform.isIOS ? 238 : 230,
                                             crossAxisSpacing: 20,
                                             mainAxisSpacing:
                                                 10 // ** add this **
@@ -297,11 +302,13 @@ class _POSScreenState extends State<POSScreen> {
                                   )
                                 : GridView(
                                     padding: EdgeInsets.only(
-                                        top: 16.0.w,),
+                                      top: 16.0.w,
+                                    ),
                                     gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                        SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
-                                            mainAxisExtent: 240,
+                                            mainAxisExtent:
+                                                Platform.isIOS ? 238 : 230,
                                             crossAxisSpacing: 20,
                                             mainAxisSpacing:
                                                 10 // ** add this **
@@ -342,14 +349,64 @@ class _POSScreenState extends State<POSScreen> {
               transition: Transition.fade,
               duration: const Duration(seconds: 2));
         },
-        child: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColor.white, width: 2)),
-              child: CircleAvatar(
-                radius: 70.r,
-                backgroundImage: NetworkImage(d.image ?? ''),
-              ),
-            ),
+        child: Platform.isIOS
+            ? Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColor.white, width: 2)),
+                child: CircleAvatar(
+                  radius: 70.r,
+                  backgroundImage: NetworkImage(d.image ?? ''),
+                ),
+              )
+            : androidSaleContWidget(d),
       );
 }
+
+androidSaleContWidget(Datum d) => Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.white, width: 2)),
+          child: CircleAvatar(
+            radius: 70.r,
+            backgroundImage: NetworkImage(d.image ?? ''),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 14.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 130.w,
+                child: TextView(
+                    text: d.name ?? '',
+                    maxLines: 1,
+                    textOverflow: TextOverflow.ellipsis,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.white),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              SizedBox(
+                width: 100.w,
+                child: TextView(
+                  text: '${getCurrency()}${oCcy.format(d.price)}',
+                  maxLines: 1,
+                  textOverflow: TextOverflow.ellipsis,
+                  fontSize: 14.2.sp,
+                  color: AppColor.white,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );

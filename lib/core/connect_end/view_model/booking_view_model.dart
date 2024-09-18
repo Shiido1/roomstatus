@@ -14,15 +14,10 @@ import 'package:roomstatus/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:printing/printing.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 import '../../../ui/app_assets/app_color.dart';
 import '../../../ui/app_assets/app_utils.dart';
 import '../../../ui/widgets/text_widget.dart';
-import '../../constants.dart';
 import '../../core_folder/app/app.logger.dart';
 import '../model/find_customer_responsse_model/find_customer_responsse_model.dart';
 import '../model/get_cities_response_model/get_cities_response_model.dart';
@@ -155,7 +150,6 @@ class BookingViewModel extends BaseViewModel {
   }
 
   bool? isDue = false;
-  final pdf = pw.Document();
 
   Future<void> getDues(contxt, GetDuesEntityModel entity) async {
     try {
@@ -785,212 +779,5 @@ class BookingViewModel extends BaseViewModel {
         ],
       ),
     );
-  }
-
-  printReceiptWidget() async {
-    pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.SizedBox(
-                height: 4.h,
-              ),
-              pw.Column(
-                // mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    showBookingResponseModel?.data?.bookedItem ?? '',
-                    style: pw.TextStyle(
-                      fontSize: 28.2.sp,
-                    ),
-                  ),
-                  pw.SizedBox(
-                    height: 8.h,
-                  ),
-                  pw.Text(
-                    'NGN${oCcy.format(showBookingResponseModel?.data?.price ?? 0)}',
-                    style: pw.TextStyle(
-                        fontSize: 32.2.sp, fontWeight: pw.FontWeight.bold),
-                  ),
-                ],
-              ),
-              pw.SizedBox(
-                height: 10.h,
-              ),
-              pw.Container(
-                width: double.infinity,
-                padding:
-                    pw.EdgeInsets.symmetric(vertical: 15.2.w, horizontal: 20.w),
-                decoration: pw.BoxDecoration(
-                  borderRadius: pw.BorderRadius.circular(10),
-                ),
-                child: pw.Column(
-                  children: [
-                    pw.Text(
-                      showBookingResponseModel?.data?.customer ?? '',
-                      style: pw.TextStyle(
-                        fontSize: 34.12.sp,
-                      ),
-                    ),
-                    pw.SizedBox(
-                      height: 5.0.h,
-                    ),
-                    pw.Text(
-                      showBookingResponseModel?.data?.phone ?? '',
-                      style: pw.TextStyle(
-                        fontSize: 25.2.sp,
-                      ),
-                    ),
-                    pw.SizedBox(
-                      height: 5.0.h,
-                    ),
-                    pw.Text(
-                      showBookingResponseModel?.data?.email ?? '',
-                      style: pw.TextStyle(
-                        fontSize: 25.2.sp,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              pw.SizedBox(
-                height: 10.h,
-              ),
-              pw.Container(
-                width: double.infinity,
-                padding:
-                    pw.EdgeInsets.symmetric(vertical: 20.w, horizontal: 20.w),
-                decoration: pw.BoxDecoration(
-                  borderRadius: pw.BorderRadius.circular(10),
-                ),
-                child: pw.Column(
-                  children: [
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text(
-                          'Checked-In',
-                          style: pw.TextStyle(
-                            fontSize: 25.2.sp,
-                          ),
-                        ),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                          showBookingResponseModel?.data?.checkedIn ?? '',
-                          style: pw.TextStyle(
-                            fontSize: 25.2.sp,
-                          ),
-                        )
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 10.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text(
-                          'Checked-Out',
-                          style: pw.TextStyle(fontSize: 25.2.sp),
-                        ),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                            showBookingResponseModel?.data?.checkedOut ?? '',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              pw.SizedBox(
-                height: 10.h,
-              ),
-              pw.Container(
-                width: double.infinity,
-                padding:
-                    pw.EdgeInsets.symmetric(vertical: 20.w, horizontal: 20.w),
-                decoration: pw.BoxDecoration(
-                  borderRadius: pw.BorderRadius.circular(10),
-                ),
-                child: pw.Column(
-                  children: [
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Discount(%)',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                            showBookingResponseModel?.data?.discount
-                                    .toString() ??
-                                '',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 10.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Total Due',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                            'NGN${oCcy.format(showBookingResponseModel?.data?.due ?? 0)}',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                      ],
-                    ),
-                    pw.SizedBox(
-                      height: 10.h,
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Total Amount paid',
-                            style: pw.TextStyle(
-                              fontSize: 25.2.sp,
-                            )),
-                        pw.SizedBox(
-                          height: 5.0.h,
-                        ),
-                        pw.Text(
-                            'NGN${oCcy.format(showBookingResponseModel?.data?.amountPaid ?? 0)}',
-                            style: pw.TextStyle(fontSize: 25.2.sp)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        }));
-    printerCall();
-  }
-
-  void printerCall() async {
-    await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async => pdf.save());
   }
 }
