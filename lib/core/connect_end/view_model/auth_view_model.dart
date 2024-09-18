@@ -295,7 +295,9 @@ class AuthViewModel extends BaseViewModel {
         _isLoading = false;
         await AppUtils.snackbar(contxt,
             message: _loginResponse?.message!.toString());
-        Get.to(() => const Dashboard(),
+        Get.to(
+            () => const Dashboard(
+                ),
             transition: Transition.fadeIn,
             duration: const Duration(seconds: 2));
       }
@@ -711,16 +713,18 @@ class AuthViewModel extends BaseViewModel {
                             SharedPreferencesService.instance.logOut();
                           }),
                       SizedBox(
-                        height: 20.2.h,
+                        height: Platform.isIOS ? 20.2.h : 0.h,
                       ),
-                      ButtonWidget(
-                          buttonText: 'Delete Account',
-                          color: AppColor.white,
-                          border: 24,
-                          buttonWidth: double.infinity,
-                          buttonColor: AppColor.primary1,
-                          buttonBorderColor: Colors.transparent,
-                          onPressed: () => deleteAccount(context)),
+                      Platform.isIOS
+                          ? ButtonWidget(
+                              buttonText: 'Delete Account',
+                              color: AppColor.white,
+                              border: 24,
+                              buttonWidth: double.infinity,
+                              buttonColor: AppColor.primary1,
+                              buttonBorderColor: Colors.transparent,
+                              onPressed: () => deleteAccount(context))
+                          : const SizedBox.shrink(),
                       SizedBox(
                         height: 10.2.h,
                       ),

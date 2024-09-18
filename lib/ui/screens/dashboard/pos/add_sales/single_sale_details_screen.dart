@@ -12,6 +12,7 @@ import '../../../../app_assets/app_utils.dart';
 import '../../../../app_assets/image.dart';
 import '../../../../widgets/print_button_widget.dart';
 import '../../../../widgets/text_widget.dart';
+import '../../dashboard_screen.dart';
 
 // ignore: must_be_immutable
 class SingleSaleDetailsScreen extends StatelessWidget {
@@ -199,13 +200,14 @@ class SingleSaleDetailsScreen extends StatelessWidget {
                                     buttonBorderColor: AppColor.white,
                                     onPressed: () async {
                                       Clipboard.setData(ClipboardData(
-                                          text: "${model
-                                              .sumUsingLoop(model
-                                                  .singleSalesResponseModel!
-                                                  .items!)}00"));
+                                          text:
+                                              "${model.sumUsingLoop(model.singleSalesResponseModel!.items!)}00"));
                                       await AppUtils.snackbar(context,
                                           message: 'Price Copied..!');
-                                      Get.back();
+
+                                      Get.to(() => Dashboard(),
+                                          transition: Transition.noTransition,
+                                          duration: const Duration(seconds: 2));
                                     }),
                                 SizedBox(
                                   height: 16.0.h,
