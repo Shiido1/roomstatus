@@ -1,4 +1,6 @@
 PODS:
+  - external_app_launcher (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_image_compress_common (1.0.0):
     - Flutter
@@ -43,6 +45,7 @@ PODS:
   - TOCropViewController (2.7.4)
 
 DEPENDENCIES:
+  - external_app_launcher (from `.symlinks/plugins/external_app_launcher/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
@@ -60,6 +63,8 @@ SPEC REPOS:
     - TOCropViewController
 
 EXTERNAL SOURCES:
+  external_app_launcher:
+    :path: ".symlinks/plugins/external_app_launcher/ios"
   Flutter:
     :path: Flutter
   flutter_image_compress_common:
@@ -76,6 +81,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/darwin"
 
 SPEC CHECKSUMS:
+  external_app_launcher: ad55ac844aa21f2d2197d7cec58ff0d0dc40bbc0
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   image_cropper: 37d40f62177c101ff4c164906d259ea2c3aa70cf
